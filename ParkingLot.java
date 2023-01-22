@@ -48,15 +48,15 @@ public class ParkingLot {
 			System.out.println("File name cannot be null.");
 			return;
 		}
-
 		// determine numRows and numSpotsPerRow; you can do so by
 		// writing your own code or alternatively completing the 
 		// private calculateLotDimensions(...) that I have provided
 		calculateLotDimensions(strFilename);
 
 		// instantiate the lotDesign and occupancy variables!
-		// WRITE YOUR CODE HERE!
-
+		lotDesign = new CarType[numRows][numSpotsPerRow];
+		occupancy = new Car[numRows][numSpotsPerRow];
+		
 		// populate lotDesign and occupancy; you can do so by
 		// writing your own code or alternatively completing the 
 		// private populateFromFile(...) that I have provided
@@ -124,10 +124,21 @@ public class ParkingLot {
 	private void calculateLotDimensions(String strFilename) throws Exception {
 
 		Scanner scanner = new Scanner(new File(strFilename));
-
 		while (scanner.hasNext()) {
 			String str = scanner.nextLine();
-			// WRITE YOUR CODE HERE!
+			str = str.replaceAll(" ", "");
+			for(int i=0; i<str.length();i++){
+				if(str.charAt(i) == ','){
+					continue;
+				}else{
+					numSpotsPerRow++;
+				}
+			}
+			if(str.equals("") || str.equals("###")){
+				numSpotsPerRow = numSpotsPerRow / numRows;
+				break;
+			}
+			numRows++;
 		}
 
 		scanner.close();
@@ -137,18 +148,59 @@ public class ParkingLot {
 
 		Scanner scanner = new Scanner(new File(strFilename));
 
-		// YOU MAY NEED TO DEFINE SOME LOCAL VARIABLES HERE!
+		int currentRow = 0;
+		int currentSpot = 0;
+		int occupiedRow = -1;
+		int occupiedSpot = -1;
 
 		// while loop for reading the lot design
 		while (scanner.hasNext()) {
 			String str = scanner.nextLine();
-			// WRITE YOUR CODE HERE!
+			for(int i=0; i<str.length();i++){
+				if(str.charAt(i)=='E'){
+					lotDesign[currentRow][currentSpot] = CarType.ELECTRIC;
+					currentSpot++;
+				}else if(str.charAt(i)=='S'){
+					lotDesign[currentRow][currentSpot] = CarType.SMALL;
+					currentSpot++;
+				}else if(str.charAt(i)=='R'){
+					lotDesign[currentRow][currentSpot] = CarType.REGULAR;
+					currentSpot++;
+				}else if(str.charAt(i)=='L'){
+					lotDesign[currentRow][currentSpot] = CarType.LARGE;
+					currentSpot++;
+				}else if(str.charAt(i)=='N'){
+					lotDesign[currentRow][currentSpot] = CarType.NA;
+					currentSpot++;
+				}
+			}
+			if(str.equals("") || str.equals("###")){
+				break;
+			}
+			currentRow++;
+			currentSpot = 0;
 		}
 
 		// while loop for reading occupancy data
 		while (scanner.hasNext()) {
 			String str = scanner.nextLine();
-			// WRITE YOUR CODE HERE!
+			str = str.replaceAll(" ", "");
+			if(!str.equals("") && Character.isDigit(str.charAt(0))){
+				occupiedRow = Character.getNumericValue(str.charAt(0));
+				occupiedSpot = Character.getNumericValue(str.charAt(2));
+				if(str.charAt(4)=='E'){
+					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.ELECTRIC, str.substring(6,9));
+				}else if(str.charAt(4)=='S'){
+					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.SMALL, str.substring(6,9));
+				}else if(str.charAt(4)=='R'){
+					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.REGULAR, str.substring(6,9));
+				}else if(str.charAt(4)=='L'){
+					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.LARGE, str.substring(6,9));
+				}else if(str.charAt(4)=='N'){
+					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.NA, str.substring(6,9));
+				}
+			}
+			
 		}
 
 		scanner.close();
