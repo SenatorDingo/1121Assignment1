@@ -83,9 +83,15 @@ public class ParkingLot {
 	 *         of range, or when there is no car parked at (i, j)
 	 */
 	public Car remove(int i, int j) {
-		// WRITE YOUR CODE HERE!
-		return null; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD
-
+		if(i<0 || i>=numRows || j<0 || j>=numSpotsPerRow){
+			return null;
+		}else{
+			if(occupancy[i][j]==null){
+				return null;
+			}else{
+				return occupancy[i][j];
+			}
+		}
 	}
 
 	/**
