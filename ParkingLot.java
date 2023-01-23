@@ -71,7 +71,11 @@ public class ParkingLot {
 	 * @param c is the car to be parked
 	 */
 	public void park(int i, int j, Car c) {
-		// WRITE YOUR CODE HERE!
+		if(canParkAt(i,j,c)){
+			occupancy[i][j] = c;
+		}else{
+			System.out.println("Car" + c + "cannot be parked at (" + i + "," + j + ")");
+		}
 	}
 
 	/**
@@ -89,7 +93,7 @@ public class ParkingLot {
 			if(occupancy[i][j]==null){
 				return null;
 			}else{
-				return occupancy[i][j];
+				return occupancy[i][j]= null;
 			}
 		}
 	}
@@ -103,8 +107,13 @@ public class ParkingLot {
 	 * @return true if car c can park at (i, j) and false otherwise
 	 */
 	public boolean canParkAt(int i, int j, Car c) {
-		// WRITE YOUR CODE HERE!
-		return false; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD
+		if(i<0 || i>=numRows || j<0 || j>=numSpotsPerRow){
+			return false;
+		}
+		if(lotDesign[i][j] == c.getType()){
+			return true;
+		}
+		return false; 
 
 	}
 
@@ -210,15 +219,15 @@ public class ParkingLot {
 				occupiedRow = Character.getNumericValue(str.charAt(0));
 				occupiedSpot = Character.getNumericValue(str.charAt(2));
 				if(str.charAt(4)=='E'){
-					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.ELECTRIC, str.substring(6,9));
+					park(occupiedRow, occupiedSpot, new Car(CarType.ELECTRIC, str.substring(6)));
 				}else if(str.charAt(4)=='S'){
-					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.SMALL, str.substring(6,9));
+					park(occupiedRow, occupiedSpot, new Car(CarType.SMALL, str.substring(6)));
 				}else if(str.charAt(4)=='R'){
-					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.REGULAR, str.substring(6,9));
+					park(occupiedRow, occupiedSpot, new Car(CarType.REGULAR, str.substring(6)));
 				}else if(str.charAt(4)=='L'){
-					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.LARGE, str.substring(6,9));
+					park(occupiedRow, occupiedSpot, new Car(CarType.LARGE, str.substring(6)));
 				}else if(str.charAt(4)=='N'){
-					occupancy[occupiedRow][occupiedSpot] = new Car(CarType.NA, str.substring(6,9));
+					park(occupiedRow, occupiedSpot, new Car(CarType.NA, str.substring(6)));
 				}
 			}
 			
