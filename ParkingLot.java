@@ -107,8 +107,16 @@ public class ParkingLot {
 	 *         used for parking (i.e., excluding spots that point to CarType.NA)
 	 */
 	public int getTotalCapacity() {
-		// WRITE YOUR CODE HERE!
-		return -1; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD
+		int capacity = 0;
+		for(int i=0; i<numRows; i++){
+			for(int j=0; j<numSpotsPerRow; j++){
+				if(lotDesign[i][j] == CarType.NA){
+					continue;
+				}
+				capacity++;
+			}
+		}
+		return capacity;
 
 	}
 
@@ -117,8 +125,15 @@ public class ParkingLot {
 	 *         cars parked in the lot)
 	 */
 	public int getTotalOccupancy() {
-		// WRITE YOUR CODE HERE!
-		return -1; // REMOVE THIS STATEMENT AFTER IMPLEMENTING THIS METHOD		
+		int numCars = 0;
+		for(int i=0; i<numRows; i++){
+			for(int j=0; j<numSpotsPerRow; j++){
+				if(occupancy[i][j]!=null){
+					numCars++;
+				}
+			}
+		}
+		return numCars; 		
 	}
 
 	private void calculateLotDimensions(String strFilename) throws Exception {
@@ -134,7 +149,7 @@ public class ParkingLot {
 					numSpotsPerRow++;
 				}
 			}
-			if(str.equals("") || str.equals("###")){
+			if(str.equals("") || str.equals(SECTIONER)){
 				numSpotsPerRow = numSpotsPerRow / numRows;
 				break;
 			}
@@ -174,7 +189,7 @@ public class ParkingLot {
 					currentSpot++;
 				}
 			}
-			if(str.equals("") || str.equals("###")){
+			if(str.equals("") || str.equals(SECTIONER)){
 				break;
 			}
 			currentRow++;
