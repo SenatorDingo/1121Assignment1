@@ -16,11 +16,14 @@ public class StudentInfo {
     public static void display() {
 
         System.out.println("************************************************************");
+        System.out.println("*               STUDENT #1 NAME: ERIC ZHOU                 *");
+        System.out.println("*                 STUDENT #1 ID: 300286231                 *");
+        System.out.println("*            STUDENT #1 SECTION: A                         *");
         System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
-        System.out.println("************************************************************");
+        System.out.println("*               STUDENT #2 NAME:                           *");
+		System.out.println("*                 STUDENT #2 ID:                           *");
+		System.out.println("*            STUDENT #1 SECTION: A                         *");
+		System.out.println("************************************************************");
         System.out.println();
 
     }
