@@ -74,7 +74,7 @@ public class ParkingLot {
 		if(canParkAt(i,j,c)){
 			occupancy[i][j] = c;
 		}else{
-			System.out.println("Car" + c + "cannot be parked at (" + i + "," + j + ")");
+			System.out.println("Car " + c + " cannot be parked at (" + i + "," + j + ")");
 		}
 	}
 
@@ -110,10 +110,31 @@ public class ParkingLot {
 		if(i<0 || i>=numRows || j<0 || j>=numSpotsPerRow){
 			return false;
 		}
-		if(lotDesign[i][j] == c.getType()){
+		if(occupancy[i][j]!=null || lotDesign[i][j]==CarType.NA){
+			return false;
+		}
+		if(c.getType()==CarType.ELECTRIC){
 			return true;
 		}
-		return false; 
+		else if(c.getType()==CarType.SMALL){
+			if(lotDesign[i][j]==CarType.ELECTRIC){
+				return false;
+			}else{
+				return true;
+			}
+		}else if(c.getType()==CarType.REGULAR){
+			if(lotDesign[i][j]==CarType.REGULAR || lotDesign[i][j]==CarType.LARGE){
+				return true;
+			}else{
+				return false;
+			}
+		}else{
+			if(lotDesign[i][j]==CarType.LARGE){
+				return true;
+			}else{
+				return false;
+			}
+		}
 
 	}
 
