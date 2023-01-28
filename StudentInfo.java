@@ -20,10 +20,10 @@ public class StudentInfo {
         System.out.println("*                 STUDENT #1 ID: 300286231                 *");
         System.out.println("*            STUDENT #1 SECTION: A                         *");
         System.out.println("*                                                          *");
-        System.out.println("*               STUDENT #2 NAME:                           *");
-		System.out.println("*                 STUDENT #2 ID:                           *");
-		System.out.println("*            STUDENT #1 SECTION: A                         *");
-		System.out.println("************************************************************");
+        System.out.println("*               STUDENT #2 NAME: ABHAY ARIYAPPILLIL        *");
+	System.out.println("*                 STUDENT #2 ID: 300322826                 *");
+	System.out.println("*            STUDENT #1 SECTION: A                         *");
+	System.out.println("************************************************************");
         System.out.println();
 
     }
