@@ -2,8 +2,8 @@ import java.io.File;
 import java.util.Scanner;
 
 /*
- * @author Eric Zhou, [student 2], University of Ottawa
- * @author Abhay Ariyappillil, [student 1], University of Ottawa
+ * @author Eric Zhou, [student 1], University of Ottawa
+ * @author Abhay Ariyappillil, [student 2], University of Ottawa
  */
 public class ParkingLot {
 	/**
