@@ -2,7 +2,7 @@ import java.io.File;
 import java.util.Scanner;
 
 /**
- * @author Mehrdad Sabetzadeh, University of Ottawa
+ * @author Eric Zhou, [student 2], University of Ottawa
  */
 public class ParkingLot {
 	/**
@@ -177,15 +177,15 @@ public class ParkingLot {
 		Scanner scanner = new Scanner(new File(strFilename));
 		while (scanner.hasNext()) {
 			String str = scanner.nextLine();
-			str = str.replaceAll(" ", "");
 			for(int i=0; i<str.length();i++){
-				if(str.charAt(i) == ','){
-					continue;
-				}else{
+				if("ESRLN".contains(String.valueOf(str.charAt(i)))){
 					numSpotsPerRow++;
 				}
 			}
-			if(str.equals("") || str.equals(SECTIONER)){
+			if(str.equals("")){
+				continue;
+			}
+			if(str.equals(SECTIONER)){
 				numSpotsPerRow = numSpotsPerRow / numRows;
 				break;
 			}
@@ -225,7 +225,10 @@ public class ParkingLot {
 					currentSpot++;
 				}
 			}
-			if(str.equals("") || str.equals(SECTIONER)){
+			if(str.equals("")){
+				continue;
+			}
+			if(str.equals(SECTIONER)){
 				break;
 			}
 			currentRow++;
@@ -317,7 +320,7 @@ public class ParkingLot {
 		System.out.println("Total number of parkable spots (capacity): " + lot.getTotalCapacity());
 
 		System.out.println("Number of cars currently parked in the lot: " + lot.getTotalOccupancy());
-
+		
 		System.out.print(lot);
 
 	}
